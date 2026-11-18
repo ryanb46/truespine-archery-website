@@ -42,7 +42,7 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.15fr_1fr] md:py-20">
           <div className="space-y-6">
-            <p className="text-accent text-sm font-bold tracking-widest uppercase">
+            <p className="text-highlight text-sm font-bold tracking-widest uppercase">
               Your online pro shop
             </p>
             <h1 className="text-primary text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl">
@@ -73,8 +73,11 @@ export default function Home() {
       <section aria-label="Why archers trust TrueSpine" className="bg-primary text-primary-foreground">
         <ul className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-4 px-4 py-6 sm:px-6 md:grid-cols-4">
           {trust.map(({ icon: Icon, label }) => (
-            <li key={label} className="flex items-center gap-3 text-sm font-semibold">
-              <Icon className="text-accent size-5 shrink-0" aria-hidden="true" />
+            <li key={label} className="group flex items-center gap-3 text-sm font-semibold">
+              <Icon
+                className="text-accent size-5 shrink-0 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12"
+                aria-hidden="true"
+              />
               {label}
             </li>
           ))}
@@ -91,11 +94,11 @@ export default function Home() {
         </div>
         <ol className="grid gap-6 md:grid-cols-3">
           {steps.map(({ icon: Icon, title, body }, i) => (
-            <li key={title} className="bg-card relative rounded-xl border p-6 shadow-sm">
-              <span className="bg-secondary text-primary mb-4 inline-flex size-12 items-center justify-center rounded-full">
-                <Icon className="size-6" aria-hidden="true" />
+            <li key={title} className="group hover-lift bg-card relative rounded-xl border p-6 shadow-sm">
+              <span className="bg-secondary text-primary group-hover:bg-accent mb-4 inline-flex size-12 items-center justify-center rounded-full transition-colors duration-300">
+                <Icon className="size-6 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
               </span>
-              <p className="text-accent text-xs font-bold tracking-widest uppercase">Step {i + 1}</p>
+              <p className="text-highlight text-xs font-bold tracking-widest uppercase">Step {i + 1}</p>
               <h3 className="mt-1 text-xl font-bold">{title}</h3>
               <p className="text-muted-foreground mt-2">{body}</p>
             </li>

@@ -2,33 +2,42 @@
 @import 'tw-animate-css';
 
 /*
-  TrueSpine brand colors (business plan, section 3.2):
-  off-white background, forest green, target-orange accent.
+  TrueSpine brand colors, taken from an official 10-ring archery target:
+  gold, red, blue, black and white, on a clean off-white page.
+  Navy is the main brand color, gold is the accent, and red marks highlights.
   Change a color here and it changes everywhere.
 */
 :root {
   --radius: 0.625rem;
 
-  --background: #faf8f3; /* off-white */
-  --foreground: #1c2620;
+  --background: #f7f8fb; /* cool off-white */
+  --foreground: #0f1b2d;
   --card: #ffffff;
-  --card-foreground: #1c2620;
+  --card-foreground: #0f1b2d;
   --popover: #ffffff;
-  --popover-foreground: #1c2620;
+  --popover-foreground: #0f1b2d;
 
-  --primary: #1f4d3a; /* forest green */
-  --primary-foreground: #faf8f3;
-  --secondary: #e7eee9; /* pale green */
-  --secondary-foreground: #1f4d3a;
-  --accent: #e2682a; /* target orange */
-  --accent-foreground: #ffffff;
+  --primary: #13294b; /* navy */
+  --primary-foreground: #ffffff;
+  --secondary: #e8eef7; /* pale blue */
+  --secondary-foreground: #13294b;
+  --accent: #ffc72c; /* target gold */
+  --accent-foreground: #13294b;
+  --highlight: #c8102e; /* target red, for small headings and highlights */
 
-  --muted: #efece4;
-  --muted-foreground: #5b655f;
-  --destructive: #c2410c;
-  --border: #e2ddd1;
-  --input: #d6d0c2;
-  --ring: #1f4d3a;
+  --muted: #eef1f6;
+  --muted-foreground: #55607a;
+  --destructive: #c8102e;
+  --border: #dde3ec;
+  --input: #cbd3e0;
+  --ring: #13294b;
+
+  /* Official target ring colors, used by the target art */
+  --target-gold: #ffd52e;
+  --target-red: #e4252b;
+  --target-blue: #00a3e0;
+  --target-black: #1a1a1a;
+  --target-white: #ffffff;
 }
 
 @theme inline {
@@ -52,6 +61,12 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-highlight: var(--highlight);
+  --color-target-gold: var(--target-gold);
+  --color-target-red: var(--target-red);
+  --color-target-blue: var(--target-blue);
+  --color-target-black: var(--target-black);
+  --color-target-white: var(--target-white);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-destructive: var(--destructive);
@@ -74,5 +89,79 @@
   h2,
   h3 {
     @apply font-display tracking-tight;
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/* Arrows fly into the hero target when the page loads. */
+@keyframes arrow-in {
+  from {
+    transform: translate(220px, -140px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/* A small shake when an arrow hits, or when you hover the target. */
+@keyframes target-wobble {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-2deg);
+  }
+  75% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes arrow-quiver {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-1.5deg);
+  }
+}
+
+@utility animate-arrow-in {
+  animation: arrow-in 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@utility animate-target-wobble {
+  animation: target-wobble 0.5s ease-in-out;
+}
+
+@utility animate-arrow-quiver {
+  animation: arrow-quiver 0.35s ease-in-out 2;
+}
+
+/* Hover lift used on cards and tiles across the site. */
+@utility hover-lift {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px -12px rgb(19 41 75 / 0.35);
+    border-color: var(--accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
