@@ -31,8 +31,9 @@ export function Header() {
               to={link.to}
               className={({ isActive }) =>
                 cn(
-                  'hover:text-primary rounded-md px-3 py-2 text-sm font-medium transition-colors',
-                  isActive ? 'text-primary' : 'text-muted-foreground',
+                  'hover:text-primary relative rounded-md px-3 py-2 text-sm font-medium transition-colors',
+                  'after:bg-accent after:absolute after:inset-x-3 after:bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:transition-transform after:duration-300 hover:after:scale-x-100',
+                  isActive ? 'text-primary after:scale-x-100' : 'text-muted-foreground',
                 )
               }
             >
@@ -69,7 +70,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      'block rounded-md px-3 py-3 text-base font-medium',
+                      'block rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-secondary',
                       isActive ? 'bg-secondary text-primary' : 'text-foreground',
                     )
                   }

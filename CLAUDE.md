@@ -15,7 +15,8 @@ Live site: https://ryanb46.github.io/truespine-archery-website/
 - `npm run lint` and `npm run build` must pass before a pull request (CI runs both)
 
 ## Brand rules
-- Off-white background, forest green (`primary`), target-orange accent (`accent`). Use the theme tokens, not raw hex values, in components.
+- Colors come from an official 10-ring archery target: navy (`primary`), target gold (`accent`, with navy text), target red (`highlight`) for small headings, on a cool off-white background. The ring colors are `--target-gold`, `--target-red`, `--target-blue`, `--target-black` and `--target-white`. Use the theme tokens, not raw hex values, in components.
+- Hover motion: cards use the `hover-lift` utility; keep animations short and respect `prefers-reduced-motion` (handled in `src/index.css`).
 - Headings use the Archivo display font; body text uses Inter.
 - Mobile first: large tap targets, readable at 390px wide.
 - Voice: a friendly local pro shop. Plain language, explain archery terms the first time.

@@ -53,7 +53,7 @@ export default function About() {
   return (
     <>
       <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 md:py-20">
-        <p className="text-accent text-sm font-bold tracking-widest uppercase">Our story</p>
+        <p className="text-highlight text-sm font-bold tracking-widest uppercase">Our story</p>
         <h1 className="text-primary mt-2 text-4xl font-extrabold sm:text-5xl">
           The trusted online alternative to your local pro shop.
         </h1>
@@ -76,12 +76,12 @@ export default function About() {
           <h2 className="text-primary text-3xl font-extrabold">How every order is made</h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {process.map(({ icon: Icon, title, body }, i) => (
-              <li key={title} className="bg-card rounded-xl border p-5 shadow-sm">
+              <li key={title} className="group hover-lift bg-card rounded-xl border p-5 shadow-sm">
                 <div className="flex items-center gap-3">
                   <span className="bg-primary text-primary-foreground inline-flex size-9 items-center justify-center rounded-full text-sm font-bold">
                     {i + 1}
                   </span>
-                  <Icon className="text-accent size-5" aria-hidden="true" />
+                  <Icon className="text-highlight size-5 transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-12" aria-hidden="true" />
                 </div>
                 <h3 className="mt-3 text-lg font-bold">{title}</h3>
                 <p className="text-muted-foreground mt-1 text-sm">{body}</p>
@@ -96,9 +96,9 @@ export default function About() {
         <p className="text-muted-foreground mt-2 text-lg">Small on purpose, so every order gets a real person.</p>
         <ul className="mt-8 grid gap-6 md:grid-cols-3">
           {team.map((m) => (
-            <li key={m.role} className="bg-card rounded-xl border p-6 shadow-sm">
+            <li key={m.role} className="group hover-lift bg-card rounded-xl border p-6 shadow-sm">
               <div
-                className="bg-secondary text-primary mb-4 flex size-14 items-center justify-center rounded-full font-display text-xl font-extrabold"
+                className="bg-secondary text-primary group-hover:bg-accent mb-4 flex size-14 items-center justify-center rounded-full font-display text-xl font-extrabold transition-colors duration-300"
                 aria-hidden="true"
               >
                 {m.role[0]}

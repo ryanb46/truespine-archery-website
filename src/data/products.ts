@@ -11,6 +11,8 @@ export type Product = {
   summary: string
   priceNote: string
   highlight?: string
+  /** Optional photo in public/, for example 'products/carbon-dozen.jpg'. Without one, an illustration is shown. */
+  image?: string
 }
 
 export const products: Product[] = [

@@ -12,7 +12,7 @@ export default function ComingSoon({ title, blurb }: { title: string; blurb: str
       <span className="bg-secondary text-primary mb-6 inline-flex size-16 items-center justify-center rounded-full">
         <Hammer className="size-8" aria-hidden="true" />
       </span>
-      <p className="text-accent text-sm font-bold tracking-widest uppercase">In the workshop</p>
+      <p className="text-highlight text-sm font-bold tracking-widest uppercase">In the workshop</p>
       <h1 className="text-primary mt-2 text-4xl font-extrabold">{title}</h1>
       <p className="text-muted-foreground mt-4 text-lg">{blurb}</p>
       <p className="text-muted-foreground mt-2">This page is coming soon.</p>
