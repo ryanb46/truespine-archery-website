@@ -72,9 +72,9 @@ function Arrow({
         strokeLinecap="round"
       />
       <line x1={-half + 10} y1="-1" x2={half - 10} y2="-1" stroke="#fff" strokeOpacity="0.3" strokeWidth="1" />
-      {/* Fletching */}
-      <path d={`M${-half + 8} 0 l14 -11 h22 l-10 11 z`} fill={vane} stroke="#0f1b2d" strokeWidth="0.6" />
-      <path d={`M${-half + 8} 0 l14 11 h22 l-10 -11 z`} fill={hen} stroke="#0f1b2d" strokeWidth="0.6" />
+      {/* Fletching: low at the front, sweeping up to its tallest point at the back near the nock */}
+      <path d={`M${-half + 46} 0 L${-half + 18} -11 h-8 L${-half + 8} 0 z`} fill={vane} stroke="#0f1b2d" strokeWidth="0.6" />
+      <path d={`M${-half + 46} 0 L${-half + 18} 11 h-8 L${-half + 8} 0 z`} fill={hen} stroke="#0f1b2d" strokeWidth="0.6" />
       {/* Nock */}
       <rect x={-half - 6} y="-3" width="8" height="6" rx="1.5" fill={nock} />
       {head === 'field' ? (
