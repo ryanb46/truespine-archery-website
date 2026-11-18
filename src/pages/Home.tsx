@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Gauge, PackageCheck, RotateCw, ShieldCheck, Ruler, Wrench, Video } from 'lucide-react'
 
@@ -7,6 +8,7 @@ import { SignupForm } from '@/components/SignupForm'
 import { Button } from '@/components/ui/button'
 import { products } from '@/data/products'
 import { usePageTitle } from '@/lib/usePageTitle'
+import { cn } from '@/lib/utils'
 
 const steps = [
   {
@@ -35,6 +37,7 @@ const trust = [
 
 export default function Home() {
   usePageTitle()
+  const [tilted, setTilted] = useState<number[]>([])
 
   return (
     <>
@@ -69,19 +72,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust strip */}
-      <section aria-label="Why archers trust TrueSpine" className="bg-primary text-primary-foreground">
-        <ul className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-4 px-4 py-6 sm:px-6 md:grid-cols-4">
-          {trust.map(({ icon: Icon, label }) => (
-            <li key={label} className="group flex items-center gap-3 text-sm font-semibold">
-              <Icon
-                className="text-accent size-5 shrink-0 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12"
-                aria-hidden="true"
-              />
-              {label}
-            </li>
+      {/* Trust strip: a ribbon that scrolls left to right. Hover to pause it. */}
+      <section
+        aria-label="Why archers trust TrueSpine"
+        className="bg-primary text-primary-foreground group/ribbon overflow-hidden"
+      >
+        <ul className="sr-only">
+          {trust.map(({ label }) => (
+            <li key={label}>{label}</li>
           ))}
         </ul>
+        <div
+          className="animate-ribbon flex w-max group-hover/ribbon:[animation-play-state:paused]"
+          aria-hidden="true"
+        >
+          {[0, 1].map((half) => (
+            <div key={half} className="flex shrink-0">
+              {[0, 1, 2].flatMap((rep) =>
+                trust.map(({ icon: Icon, label }) => (
+                  <span
+                    key={`${rep}-${label}`}
+                    className="group flex items-center gap-3 px-8 py-6 text-sm font-semibold whitespace-nowrap"
+                  >
+                    <Icon
+                      className="text-accent size-5 shrink-0 transition-transform duration-300 group-hover:scale-125 group-hover:rotate-12"
+                      aria-hidden="true"
+                    />
+                    {label}
+                    <span className="bg-accent ml-8 size-1.5 rounded-full" />
+                  </span>
+                )),
+              )}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* How it works */}
@@ -89,18 +113,33 @@ export default function Home() {
         <div className="mb-10 max-w-2xl">
           <h2 className="text-primary text-3xl font-extrabold sm:text-4xl">How it works</h2>
           <p className="text-muted-foreground mt-3 text-lg">
-            Pro-shop fitting without the drive to a pro shop, in three steps.
+            Pro-shop fitting without the drive to a pro shop, in three steps. Tap a step to tilt it.
           </p>
         </div>
         <ol className="grid gap-6 md:grid-cols-3">
           {steps.map(({ icon: Icon, title, body }, i) => (
-            <li key={title} className="group hover-lift bg-card relative rounded-xl border p-6 shadow-sm">
-              <span className="bg-secondary text-primary group-hover:bg-accent mb-4 inline-flex size-12 items-center justify-center rounded-full transition-colors duration-300">
-                <Icon className="size-6 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
-              </span>
-              <p className="text-highlight text-xs font-bold tracking-widest uppercase">Step {i + 1}</p>
-              <h3 className="mt-1 text-xl font-bold">{title}</h3>
-              <p className="text-muted-foreground mt-2">{body}</p>
+            <li key={title}>
+              {/* Click a step to tilt it to the side; click again to straighten it. */}
+              <button
+                type="button"
+                aria-pressed={tilted.includes(i)}
+                onClick={() =>
+                  setTilted((t) => (t.includes(i) ? t.filter((x) => x !== i) : [...t, i]))
+                }
+                className={cn(
+                  'block h-full w-full cursor-pointer rounded-xl text-left transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none',
+                  tilted.includes(i) && (i % 2 === 0 ? '-rotate-3' : 'rotate-3'),
+                )}
+              >
+                <div className="group hover-lift bg-card relative h-full rounded-xl border p-6 shadow-sm">
+                  <span className="bg-secondary text-primary group-hover:bg-accent mb-4 inline-flex size-12 items-center justify-center rounded-full transition-colors duration-300">
+                    <Icon className="size-6 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
+                  </span>
+                  <p className="text-highlight text-xs font-bold tracking-widest uppercase">Step {i + 1}</p>
+                  <h3 className="mt-1 text-xl font-bold">{title}</h3>
+                  <p className="text-muted-foreground mt-2">{body}</p>
+                </div>
+              </button>
             </li>
           ))}
         </ol>
