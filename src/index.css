@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/*
+  TrueSpine brand colors (business plan, section 3.2):
+  off-white background, forest green, target-orange accent.
+  Change a color here and it changes everywhere.
+*/
+:root {
+  --radius: 0.625rem;
+
+  --background: #faf8f3; /* off-white */
+  --foreground: #1c2620;
+  --card: #ffffff;
+  --card-foreground: #1c2620;
+  --popover: #ffffff;
+  --popover-foreground: #1c2620;
+
+  --primary: #1f4d3a; /* forest green */
+  --primary-foreground: #faf8f3;
+  --secondary: #e7eee9; /* pale green */
+  --secondary-foreground: #1f4d3a;
+  --accent: #e2682a; /* target orange */
+  --accent-foreground: #ffffff;
+
+  --muted: #efece4;
+  --muted-foreground: #5b655f;
+  --destructive: #c2410c;
+  --border: #e2ddd1;
+  --input: #d6d0c2;
+  --ring: #1f4d3a;
+}
+
+@theme inline {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Archivo', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
